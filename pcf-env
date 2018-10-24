@@ -6,3 +6,4 @@ export ORG="YourOrg"
 export SPACE="YourSpace"
 # Use 'USESKIPSSL="TRUE" --skip-ssl-validation' to continue with an insecure API endpoint
 export USESKIPSSL="FALSE"
+export APPPROTOCALL="https://"
