@@ -7,10 +7,20 @@ if [[ -z $1 ]]; then
     exit $?
 fi
 
-cf login -a https://${PCFURL} -u ${USERNAME} -p ${PASSWORD}
+source $1
 
-cf create-org $ORG  || exit $?
+if [[ ${USESKIPSSL} == "TRUE" ]]; then
+    SKIPSSL="--skip-ssl-validation"
+fi
+
+cf login -a https://${PCFURL} -u ${USERNAME} -p ${PASSWORD} ${SKIPSSL} -o system -s system || exit $?
+
+cf create-org ${ORG}  || exit $?
 
 cf create-space ${SPACE} -o $ORG || exit $?
+
+cf orgs || exit $?
+
+cf target -o ${ORG} -s ${SPACE} || exit $?
 
 cf spaces || exit $?

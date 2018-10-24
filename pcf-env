@@ -1,6 +1,8 @@
 #PCF Environment Settings
-export PCFURL="https://yourpcf endpoint"
+export PCFURL="https://api.sys.yourpcfendpoint.com"
 export USERNAME="username"
 export PASSWORD="password"
 export ORG="YourOrg"
 export SPACE="YourSpace"
+# Use 'USESKIPSSL="TRUE" --skip-ssl-validation' to continue with an insecure API endpoint
+export USESKIPSSL="FALSE"
