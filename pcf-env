@@ -1,9 +1,8 @@
 #PCF Environment Settings
-export PCFURL="https://api.sys.yourpcfendpoint.com"
-export USERNAME="username"
-export PASSWORD="password"
-export ORG="YourOrg"
-export SPACE="YourSpace"
-# Use 'USESKIPSSL="TRUE" --skip-ssl-validation' to continue with an insecure API endpoint
-export USESKIPSSL="FALSE"
+export PCFURL="https://api.sys.yourpcfendpoint.com"  # PCF API endpoint used to login to apps manger to push apps.
+export USERNAME="username" # Username to be used to login to the PCF API endpoint
+export PASSWORD="password" # Password to be used to login to the PCF API endpoint
+export ORG="YourOrg" # PCF organization that will be used for apps that will be deployed.
+export SPACE="YourSpace" # PCF space  that will be used for apps that will be deployed.
+export USESKIPSSL="FALSE" # Use 'USESKIPSSL="TRUE" --skip-ssl-validation' to continue with an insecure API endpoint
 export APPPROTOCALL="https://"

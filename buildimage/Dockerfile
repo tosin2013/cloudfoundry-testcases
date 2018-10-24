@@ -8,4 +8,7 @@ echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/s
 RUN apt update && \
 apt install -y  cf-cli && \
 pip install requests
+RUN cd /root && \
+git clone https://github.com/tosin2013/cloudfoundry-testcases.git
+
 ENTRYPOINT ["/bin/bash"]
