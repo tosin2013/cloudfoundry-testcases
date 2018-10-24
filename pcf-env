@@ -1,0 +1,6 @@
+#PCF Environment Settings
+export PCFURL="https://yourpcf endpoint"
+export USERNAME="username"
+export PASSWORD="password"
+export ORG="YourOrg"
+export SPACE="YourSpace"
