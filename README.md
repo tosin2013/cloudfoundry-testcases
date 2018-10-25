@@ -28,7 +28,14 @@ The following is a collection of test cases for cloudfoundry.
 ```
 
 #### Test sample connectivity
+```
 python test-pas-deployment/test-deployed-app.py --filename output.csv --url https://yourapiendpoint.com
+```
+
+#### delete app
+```
+./delete-app/delete-app.sh pcf-env  appname
+```
 
 ## Authors
 
