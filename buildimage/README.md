@@ -10,9 +10,15 @@ The following Dockerfile will be used to perform the tests.
 
 ### Installing
 
-Build docker image
+Build docker image on ubuntu
 ```
-cd buildimage/
+cd buildimage/ubuntu
+docker build -t cloudfoundry-testcases:v1 .
+```
+
+Build docker image on alpinelinux
+```
+cd buildimage/alpinelinux
 docker build -t cloudfoundry-testcases:v1 .
 ```
 
@@ -35,8 +41,4 @@ Change to your directory to cloudfoundry-testcases
 cd /root/cloudfoundry-testcases/
 ```
 
-## Authors
-
-* **Tosin Akinosho** - *Initial work* - [tosin2013](https://github.com/tosin2013)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+run scripts
