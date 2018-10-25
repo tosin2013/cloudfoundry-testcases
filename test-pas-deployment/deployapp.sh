@@ -28,4 +28,4 @@ cf push
 APPENDPOINT=$(cf app spring-music | grep routes | awk '{print $2}')
 echo "APP ENDPONT: ${APPPROTOCALL}${APPENDPOINT}"
 echo "Call the test-deployed-app.py script to test connectivity. "
-echo "EXAMPLE: python test-deployed-app.py --filename output.csv --url ${APPPROTOCALL}${APPENDPOINT}"
+echo "EXAMPLE: python test-pas-deployment/test-deployed-app.py --filename output.csv --url ${APPPROTOCALL}${APPENDPOINT}"

@@ -1,5 +1,5 @@
 #PCF Environment Settings
-export PCFURL="https://api.sys.yourpcfendpoint.com"  # PCF API endpoint used to login to apps manger to push apps.
+export PCFURL="api.sys.yourpcfendpoint.com"  # PCF API endpoint used to login to apps manger to push apps.
 export USERNAME="username" # Username to be used to login to the PCF API endpoint
 export PASSWORD="password" # Password to be used to login to the PCF API endpoint
 export ORG="YourOrg" # PCF organization that will be used for apps that will be deployed.
