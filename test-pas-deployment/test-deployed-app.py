@@ -62,7 +62,6 @@ parser.add_argument('--url', help='Provide url point to be used.')
 args = parser.parse_args()
 if args.filename != None:
     csvheader(args.filename)
-    yesChoice = ['yes', 'y']
 
     try:
         while True:

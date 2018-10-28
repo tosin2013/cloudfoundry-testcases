@@ -32,9 +32,24 @@ The following is a collection of test cases for cloudfoundry.
 python test-pas-deployment/test-deployed-app.py --filename output.csv --url https://yourapiendpoint.com
 ```
 
+#### Test rabbitmq app
+```
+./test-rabbitmq-deployment/deployapp.sh pcf-env
+```
+
+#### Test rabbitmq functionality
+```
+python test-rabbitmq-deployment/test-rabbitmq-app.py --filename output.csv --url  https://yourapiendpoint.com
+```
+
 #### delete app
 ```
 ./delete-app/delete-app.sh pcf-env  appname
+```
+
+#### delete service
+```
+./delete-service/delete-service.sh pcf-env  appname servicename
 ```
 
 ## Authors
