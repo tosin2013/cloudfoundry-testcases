@@ -19,7 +19,7 @@ The following is a collection of test cases for cloudfoundry.
 
 #### delete org and space
 ```
-./create-org-space/create-org-space.sh pcf-env
+./delete-org-space/delete-org-space.sh pcf-env
 ```
 #### deploy sample app
 * Deploy sample app [deployapp.sh](https://github.com/tosin2013/cloudfoundry-testcases/blob/master/test-pas-deployment/deployapp.sh) currently uses the [spring-music](https://github.com/cloudfoundry-samples/spring-music) app from [cloud foundry](https://github.com/cloudfoundry-samples/spring-music).
