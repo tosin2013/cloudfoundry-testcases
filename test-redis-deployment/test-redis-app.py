@@ -44,31 +44,15 @@ def csvheader(fileName):
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(['Timestamp', 'Action', 'ResponseCode', "ResponseTime"])
 
-def checkappping(url, fileName):
+
+def checkkeyvalue(url, fileName,randomkey):
     try:
-        print  bcolors.BOLD + "Verifing that the application is up and responding, and can connect to the RabbitMQ backend service" + bcolors.ENDC
+        print  bcolors.BOLD + "Returns the value stored in Redis at the key specified by the path " + bcolors.ENDC
         headers = {
             'cache-control': "no-cache",
             }
 
-        response = requests.request("GET", url+"/ping", headers=headers, verify=False)
-
-        writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "ping_queue",response.status_code, response.elapsed.total_seconds())
-    except Exception as e:
-        print bcolors.FAIL + "FAILED TO CONNECT TO ENDPOINT "+str(url)+"." + bcolors.ENDC
-        print bcolors.FAIL + str(e) + bcolors.ENDC
-        writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "", "-1")
-        pass
-
-
-def checkappqueues(url, fileName):
-    try:
-        print  bcolors.BOLD + "Prints the queues that have been defined so far. " + bcolors.ENDC
-        headers = {
-            'cache-control': "no-cache",
-            }
-
-        response = requests.request("GET", url+"/queues", headers=headers, verify=False)
+        response = requests.request("GET", url+"/"+randomkey, headers=headers, verify=False)
 
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "print_queue",response.status_code, response.elapsed.total_seconds())
         print response.text
@@ -78,35 +62,17 @@ def checkappqueues(url, fileName):
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "", "-1")
         pass
 
-def posttoappqueues(url, fileName):
+def putnewitem(url, fileName,randomkey):
     try:
-        headers = {
-            'cache-control': "no-cache",
-            }
-        data= {
-            'name': 'TestQueue',
-        }
-        response = requests.request("POST", url+"/queues", headers=headers, data=data,verify=False)
-
-        writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "post_new_queue",response.status_code, response.elapsed.total_seconds())
-        print response.text
-    except Exception as e:
-        print bcolors.FAIL + "FAILED TO CONNECT TO ENDPOINT "+str(url)+"." + bcolors.ENDC
-        print bcolors.FAIL + str(e) + bcolors.ENDC
-        writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "", "-1")
-        pass
-
-def posttoappqueuesname(url, fileName):
-    try:
-        print  bcolors.BOLD + "Pushes a message, passed in the 'data' field, into the named message queue." + bcolors.ENDC
+        print  bcolors.BOLD + "Sets the value stored in Redis at the specified key to a value posted in the 'data' field." + bcolors.ENDC
         headers = {
             'cache-control': "no-cache",
             }
 
         data= {
-            'data': randomword(10),
+            'data': randomword(25),
         }
-        response = requests.request("PUT", url+"/queue/TestQueue", headers=headers, data=data,verify=False)
+        response = requests.request("PUT", url+"/"+randomkey, headers=headers, data=data,verify=False)
 
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "random_item",response.status_code, response.elapsed.total_seconds())
         print response.text
@@ -116,14 +82,14 @@ def posttoappqueuesname(url, fileName):
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "", "-1")
         pass
 
-def checkappqueuesitem(url, fileName):
+def deletekey(url, fileName,randomkey):
     try:
-        print  bcolors.BOLD + "Pulls a single message from the named message queue. " + bcolors.ENDC
+        print  bcolors.BOLD + "Deletes a Redis key spcified by the path.  " + bcolors.ENDC
         headers = {
             'cache-control': "no-cache",
             }
 
-        response = requests.request("GET", url+"/queue/TestQueue", headers=headers, verify=False)
+        response = requests.request("DELETE", url+"/"+randomkey, headers=headers, verify=False)
 
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "print_queue_item",response.status_code, response.elapsed.total_seconds())
         print response.text
@@ -140,13 +106,14 @@ parser.add_argument('--url', help='Provide url point to be used.')
 args = parser.parse_args()
 if args.filename != None:
     csvheader(args.filename)
-    my_functions = [checkappqueues, posttoappqueuesname, checkappqueuesitem,checkappping]
     try:
-        checkappping(args.url,args.filename)
-        print  bcolors.BOLD + "Define a queue, passed in the 'name' field." + bcolors.ENDC
-        posttoappqueues(args.url,args.filename)
         while True:
-            random.choice(my_functions)(args.url,args.filename)
+            randomstring=randomword(10)
+            putnewitem(args.url,args.filename,randomstring)
+            time.sleep(1)
+            checkkeyvalue(args.url,args.filename,randomstring)
+            time.sleep(1)
+            deletekey(args.url,args.filename,randomstring)
             print bcolors.BOLD + "Press Ctrl-C to exit " + bcolors.ENDC
             time.sleep(5)
     except KeyboardInterrupt:

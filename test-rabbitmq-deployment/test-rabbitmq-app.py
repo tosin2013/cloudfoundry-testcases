@@ -96,7 +96,7 @@ def posttoappqueues(url, fileName):
         writetoCSV(fileName, datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"), "", "-1")
         pass
 
-def posttoappqueuesname(url, fileName):
+def puttoappqueuesname(url, fileName):
     try:
         print  bcolors.BOLD + "Pushes a message, passed in the 'data' field, into the named message queue." + bcolors.ENDC
         headers = {
@@ -140,7 +140,7 @@ parser.add_argument('--url', help='Provide url point to be used.')
 args = parser.parse_args()
 if args.filename != None:
     csvheader(args.filename)
-    my_functions = [checkappqueues, posttoappqueuesname, checkappqueuesitem,checkappping]
+    my_functions = [checkappqueues, puttoappqueuesname, checkappqueuesitem,checkappping]
     try:
         checkappping(args.url,args.filename)
         print  bcolors.BOLD + "Define a queue, passed in the 'name' field." + bcolors.ENDC

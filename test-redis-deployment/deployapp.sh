@@ -28,5 +28,5 @@ cf start redis-test-app
 
 APPENDPOINT=$(cf app redis-test-app | grep routes | awk '{print $2}')
 echo "APP ENDPONT: ${APPPROTOCALL}${APPENDPOINT}"
-echo "Call the test-deployed-app.py script to test connectivity. "
-echo "EXAMPLE: python test-pas-deployment/test-deployed-app.py --filename output.csv --url ${APPPROTOCALL}${APPENDPOINT}"
+echo "Call the test-redis-app.py script to test connectivity. "
+echo "EXAMPLE: python test-redis-deployment/test-redis-app.py --filename output.csv --url ${APPPROTOCALL}${APPENDPOINT}"
