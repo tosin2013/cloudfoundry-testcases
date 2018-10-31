@@ -42,6 +42,18 @@ python test-pas-deployment/test-deployed-app.py --filename output.csv --url http
 python test-rabbitmq-deployment/test-rabbitmq-app.py --filename output.csv --url  https://yourapiendpoint.com
 ```
 
+
+#### Test redis app
+```
+./test-redis-deployment/deployapp.sh pcf-env redis-plan
+```
+
+#### Test redis functionality
+```
+python test-redis-deployment/test-redis-app.py --filename output.csv --url  https://yourapiendpoint.com
+```
+
+
 #### delete app
 ```
 ./delete-app/delete-app.sh pcf-env  appname
