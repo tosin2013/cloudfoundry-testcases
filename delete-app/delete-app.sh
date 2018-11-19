@@ -17,4 +17,4 @@ cf login -a https://${PCFURL} -u ${USERNAME} -p ${PASSWORD} ${SKIPSSL} -o ${ORG}
 
 cf target -o ${ORG} -s ${SPACE} || exit $?
 
-cf delete $2 -f || exit $?
+cf delete $2 -f -r || exit $?
